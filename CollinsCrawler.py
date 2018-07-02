@@ -16,7 +16,7 @@ base_url = 'http://youdao.com/w/'
 
 # Read content from path
 def read(path):
-    with open(path, 'r') as file:
+    with open(path, 'r', encoding='utf-8') as file:
         return file.read()
 
 
@@ -80,6 +80,6 @@ def result(word, html):
 
 # Look up the word
 def look_up(word):
-    # html = read(sample_path_make)
-    html = fetch(word)
+    html = read(sample_path_make)
+    # html = fetch(word)
     return result(word, html)
