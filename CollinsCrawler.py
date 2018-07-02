@@ -1,7 +1,8 @@
 # -*- coding:utf-8 -*-
 
 import re
-from urllib import urlopen
+import urllib.request
+
 from bs4 import BeautifulSoup
 from Model.Word import Word
 from Model.Type import Type
@@ -22,7 +23,7 @@ def read(path):
 # Fetch content from URL
 def fetch(word):
     url = base_url + word
-    return urlopen(url).read()
+    return urllib.request.urlopen(url).read()
 
 
 # Result
@@ -79,6 +80,6 @@ def result(word, html):
 
 # Look up the word
 def look_up(word):
-    html = read(sample_path_make)
+    # html = read(sample_path_make)
     html = fetch(word)
     return result(word, html)
