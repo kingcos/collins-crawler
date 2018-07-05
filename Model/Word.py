@@ -6,8 +6,8 @@ class Word:
     name = ''
     phonetic = ''
     frequency = ''
-    ranks = []
     additional = []
+    levels = []
     types = []
 
     def __init__(self):

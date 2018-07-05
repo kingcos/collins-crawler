@@ -1,8 +1,7 @@
 # -*- coding:utf-8 -*-
 
 
-class Type:
+class Level:
     id = ''
     wordID = ''
     name = ''
-    meanings = []

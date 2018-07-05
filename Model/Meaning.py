@@ -3,7 +3,7 @@
 
 class Meaning:
     id = ''
-    wordID = ''
+    typeID = ''
     description = ''
     additional = ''
     examples = []

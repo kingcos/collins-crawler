@@ -39,7 +39,7 @@ def result(word, html):
     word.name = word_h4.find(name='span', attrs={'class': 'title'}).get_text()
     word.phonetic = word_h4.find(name='em', attrs={'class': 'phonetic'}).get_text()
     word.frequency = word_h4.find(name='span', attrs={'class': 'star'}).attrs['class'][1]
-    word.ranks = word_h4.find(name='span', attrs={'class': 'rank'}).get_text().split(' ')
+    word.levels = word_h4.find(name='span', attrs={'class': 'rank'}).get_text().split(' ')
     word.additional = map(lambda s: s.strip(),
                           re.sub('\\(|\\)', '',
                                  word_h4.find(name='span', attrs={'class': 'additional'}).get_text())

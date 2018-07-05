@@ -3,6 +3,6 @@
 
 class Example:
     id = ''
-    wordID = ''
+    meaningID = ''
     english = ''
     chinese = ''
