@@ -3,6 +3,9 @@
 
 class Type:
     id = ''
-    wordID = ''
+    word_id = ''
     name = ''
     meanings = []
+
+    def desc(self):
+        return '(\'' + self.word_id + '\', \'' + self.name + '\')'

@@ -1,5 +1,7 @@
 # -*- coding:utf-8 -*-
 
+from functools import reduce
+
 
 class Word:
     id = ''
@@ -10,5 +12,6 @@ class Word:
     levels = []
     types = []
 
-    def __init__(self):
-        pass
+    def desc(self):
+        additional = reduce(lambda x, y: x + ' ' + y, self.additional) if len(self.additional) > 0 else ''
+        return '(\'' + self.name + '\', \'' + self.phonetic + '\', \'' + self.frequency + '\', \'' + additional + '\')'
