@@ -40,41 +40,43 @@ def result(word, html):
     word.phonetic = word_h4.find(name='em', attrs={'class': 'phonetic'}).get_text()
     word.frequency = word_h4.find(name='span', attrs={'class': 'star'}).attrs['class'][1]
     word.levels = word_h4.find(name='span', attrs={'class': 'rank'}).get_text().split(' ')
-    word.additional = map(lambda s: s.strip(),
-                          re.sub('\\(|\\)', '',
-                                 word_h4.find(name='span', attrs={'class': 'additional'}).get_text())
-                          .split(','))
+    word.additional = [s.strip()
+                       for s in re.sub('\\(|\\)',
+                                       '',
+                                       word_h4.find(name='span',
+                                                    attrs={'class': 'additional'}).get_text()).split(',')]
 
     # print(word_name, word_phonetic, word_star, word_ranks, word_additional)
 
     # Type
     word_types = collins_content.find_all(name='div', attrs={'class': 'wt-container'})
     for word_type in word_types:
-        type = Type()
-        type.name = word_type.find(name='div', attrs={'class': 'trans-tip'}).find('span').get_text() if len(word_types) > 1 else None
+        w_type = Type()
+        w_type.name = word_type.find(name='div', attrs={'class': 'trans-tip'}).find('span').get_text() \
+            if len(word_types) > 1 else None
 
         # Meaning
         type_meanings = word_type.find_all(name='div', attrs={'class': 'collinsMajorTrans'})
+        w_type.meanings = []
         for type_meaning in type_meanings:
             meaning = Meaning()
 
-            meaning.additional = map(lambda s: s.get('title') if s.get('title') is not None else s.get_text(),
-                                     type_meaning.find_all(name='span', attrs={'class': 'additional'}))
-            map(lambda s: s.clear(),
-                type_meaning.find('p').find_all(name='span', attrs={'class': 'additional'}))
+            meaning.additional = [s.get('title') if s.get('title') is not None else s.get_text()
+                                  for s in type_meaning.find_all(name='span', attrs={'class': 'additional'})]
 
-            meaning.description = type_meaning.find('p').get_text().strip()
-
+            [s.clear() for s in type_meaning.find('p').find_all(name='span', attrs={'class': 'additional'})]
+            meaning.description = re.sub('\s{2,}', ' ', type_meaning.find('p').get_text().strip())
             # Example
-            meaning_examples = collins_content.find_all(name='div', attrs={'class': 'exampleLists'})
+            meaning_examples = type_meaning.parent.find_all(name='div', attrs={'class': 'exampleLists'})
+            meaning.examples = []
             for meaning_example in meaning_examples:
                 example = Example()
                 sentences = meaning_example.find_all('p')
                 example.english = sentences[0].get_text().strip()
                 example.chinese = sentences[1].get_text().strip()
                 meaning.examples.append(example)
-            type.meanings.append(meaning)
-        word.types.append(type)
+            w_type.meanings.append(meaning)
+        word.types.append(w_type)
     return word
 
 
