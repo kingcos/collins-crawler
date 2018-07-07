@@ -8,4 +8,5 @@ class Type:
     meanings = []
 
     def desc(self):
-        return '(\'' + self.word_id + '\', \'' + self.name + '\')'
+        name = self.name if self.name is not None else ''
+        return '(\'' + self.word_id + '\', \'' + name + '\')'

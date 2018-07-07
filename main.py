@@ -20,7 +20,7 @@ if __name__ == '__main__':
 
             # Save Level
             [liter.execute('INSERT INTO Level (wordID, name) values ('
-                           + word_id + ', \'' + result.levels[0] + '\')')
+                           + word_id + ', \'' + level + '\')')
              for level in result.levels]
 
             # Save Type
