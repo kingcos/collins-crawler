@@ -3,5 +3,5 @@
 
 class Level:
     id = ''
-    wordID = ''
+    word_id = ''
     name = ''
