@@ -54,9 +54,6 @@ class Keeper:
                  CONSTRAINT meaning_example FOREIGN KEY (meaningID) REFERENCES Meaning (id));"""
         self.cursor.execute(sql)
 
-
-
-
-
-
-
+    def execute(self, sql):
+        self.cursor.execute(sql)
+        self.database.commit()
