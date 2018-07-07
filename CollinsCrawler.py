@@ -27,7 +27,7 @@ def fetch(word):
 
 
 # Result
-def result(word, html):
+def result(html):
     beautiful_soup = BeautifulSoup(html, 'html.parser')
     # Fetched Collins content
     collins_content = beautiful_soup.select_one('div.collinsToggle')
@@ -82,6 +82,6 @@ def result(word, html):
 
 # Look up the word
 def look_up(word):
-    html = read(sample_path_make)
-    # html = fetch(word)
-    return result(word, html)
+    # html = read(sample_path_vegetable)
+    html = fetch(word)
+    return result(html)
